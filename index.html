@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ข้อมูลติดต่อ - โรงเรียนพิมานพิทยาสรรค์</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        :root { 
+            --primary: #1a5276; 
+            --accent: #2980b9; 
+            --bg: #f1f5f9; 
+            --main-gradient: linear-gradient(135deg, #1a5276, #2980b9);
+        }
+        
+        * { box-sizing: border-box; }
+
+        body { 
+            font-family: 'Prompt', sans-serif; 
+            background-color: var(--bg); 
+            color: #2c3e50; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0; padding: 0;
+            overflow-x: hidden; /* ป้องกันหน้าจอเลื่อนซ้ายขวา */
+        }
+
+        /* --- App Header: แบนเนอร์เดียวกับระบบหลัก (Responsive) --- */
+        .app-header {
+            background: #ffffff;
+            text-align: center;
+            border-bottom: 4px solid var(--primary);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            padding: 15px 10px;
+            width: 100%;
+        }
+
+        .school-logo { height: 50px; margin-bottom: 5px; }
+        .app-title { 
+            font-size: clamp(1.2rem, 5vw, 1.8rem); /* ปรับขนาดฟอนต์ตามจออัตโนมัติ */
+            font-weight: 700; 
+            color: var(--primary); 
+            margin: 0;
+            white-space: nowrap;
+        }
+        .app-subtitle { 
+            font-size: clamp(0.75rem, 3.5vw, 0.95rem); 
+            color: #475569; 
+            margin-top: 2px;
+            font-weight: 600;
+        }
+
+        .content-container { 
+            max-width: 750px; 
+            margin: 20px auto; 
+            padding: 0 15px; 
+            width: 100%; 
+        }
+        
+        .form-card { 
+            border: none; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
+            background: white; 
+            overflow: hidden; 
+            margin-bottom: 20px; 
+        }
+        
+        .card-header-custom { 
+            background: var(--main-gradient); 
+            color: white; 
+            padding: 15px; 
+            font-weight: 600; 
+            text-align: center;
+            font-size: 1rem;
+        }
+        
+        .info-item { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 15px; 
+        }
+        
+        .info-icon { 
+            min-width: 45px; 
+            height: 45px; 
+            background: #f0f7ff; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: var(--primary); 
+            font-size: 1.2rem; 
+            margin-right: 15px; 
+        }
+        
+        .info-text strong { display: block; font-size: 1rem; color: var(--primary); }
+        .info-text p { margin: 0; font-size: 0.85rem; color: #64748b; }
+
+        .form-control { 
+            border-radius: 12px; 
+            padding: 12px; 
+            border: 2px solid #f1f5f9; 
+            background: #f8fafc; 
+            font-size: 16px; /* ป้องกัน iPhone Zoom อัตโนมัติ */
+            transition: 0.3s;
+        }
+        .form-control:focus { border-color: var(--accent); box-shadow: none; background: #fff; }
+        
+        label { font-weight: 600; font-size: 0.9rem; margin-bottom: 8px; color: #475569; display: block; }
+
+        .btn-submit { 
+            background: #15803d; 
+            border: none; 
+            border-radius: 12px; 
+            padding: 14px; 
+            font-weight: 600; 
+            color: white; 
+            transition: 0.3s; 
+            width: 100%; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+        .btn-submit:hover { background: #166534; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(21, 128, 61, 0.2); }
+        .btn-submit:disabled { background: #94a3b8; transform: none; }
+
+        footer { 
+            margin-top: auto; 
+            padding: 25px; 
+            text-align: center; 
+            font-size: 0.8rem; 
+            color: #94a3b8; 
+            background: #fff;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* ปรับสไตล์สำหรับมือถือจอเล็ก */
+        @media (max-width: 480px) {
+            .content-container { margin: 15px auto; }
+            .info-item { flex-direction: column; text-align: center; }
+            .info-icon { margin-right: 0; margin-bottom: 10px; }
+            .card-header-custom { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="app-header">
+    <img src="https://raw.githubusercontent.com/joodami/school-assets/main/logo.png" alt="Logo" class="school-logo">
+    <h1 class="app-title">PS-Sarabun</h1>
+    <p class="app-subtitle">ข้อมูลติดต่อสอบถามเจ้าหน้าที่ งานสารบรรณ</p>
+</header>
+
+<div class="content-container">
+    
+    <div class="form-card">
+        <div class="card-header-custom">หน่วยงานที่รับผิดชอบ</div>
+        <div class="card-body p-3">
+            <div class="info-item">
+                <div class="info-icon"><i class="bi bi-building-fill-check"></i></div>
+                <div class="info-text text-start">
+                    <strong>งานสารบรรณโรงเรียนพิมานพิทยาสรรค์</strong>
+                    <p>ฝ่ายบริหารทั่วไป (อาคาร 1) จ.สตูล</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-card">
+        <div class="card-header-custom">ส่งข้อความแจ้งเตือนเจ้าหน้าที่ (Line Notify)</div>
+        <div class="card-body p-4">
+            <form id="contactForm">
+                <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                        <label>ชื่อ-นามสกุล ผู้ติดต่อ</label>
+                        <input type="text" name="name" id="senderName" class="form-control" required>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label>เบอร์โทรศัพท์ติดต่อกลับ</label>
+                        <input type="tel" name="tel" id="senderTel" class="form-control" required>
+                    </div>
+                    <div class="col-12">
+                        <label>เรื่องที่ต้องการสอบถามหรือแจ้งปัญหา</label>
+                        <textarea name="message" id="senderMsg" class="form-control" rows="4" placeholder="พิมพ์ข้อความที่ต้องการแจ้งเจ้าหน้าที่..." required></textarea>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <button type="submit" id="submitBtn" class="btn-submit">
+                            <i class="bi bi-send-check-fill"></i> ส่งข้อความแจ้งเตือนทันที
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a href="javascript:history.back()" class="text-muted text-decoration-none small">
+            <i class="bi bi-arrow-left"></i> กลับสู่หน้าก่อนหน้า
+        </a>
+    </div>
+</div>
+
+<footer>
+    <div>© 2026 งานสารบรรณ โรงเรียนพิมานพิทยาสรรค์</div>
+    <div>จังหวัดสตูล</div>
+</footer>
+
+<script>
+    // แทนที่ด้วย Web App URL ที่คุณครูได้จาก Google Apps Script (GAS)
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbym6d4HsmNVfT81ygGvVtnnOb6V6IniBRTfyA65Gle_sFW8Dt9MU9BoUR--kRkvSy4b/exec";
+
+    document.getElementById('contactForm').onsubmit = function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> กำลังส่งข้อมูล...';
+
+        const formData = new FormData(this);
+        
+        fetch(SCRIPT_URL, { method: 'POST', body: formData })
+        .then(response => {
+            Swal.fire({
+                title: 'ส่งข้อความสำเร็จ!',
+                text: 'เจ้าหน้าที่ได้รับข้อความเรียบร้อยแล้วค่ะ',
+                icon: 'success',
+                confirmButtonColor: '#1a5276'
+            });
+            document.getElementById('contactForm').reset();
+        })
+        .catch(error => {
+            Swal.fire({
+                title: 'เกิดข้อผิดพลาด',
+                text: 'ไม่สามารถส่งข้อมูลได้ในขณะนี้ กรุณาลองใหม่อีกครั้งค่ะ',
+                icon: 'error'
+            });
+        })
+        .finally(() => {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="bi bi-send-check-fill"></i> ส่งข้อความแจ้งเตือนทันที';
+        });
+    };
+</script>
+
+</body>
+</html>
