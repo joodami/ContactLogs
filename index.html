@@ -12,8 +12,7 @@
     <style>
         :root { 
             --primary: #1a5276; 
-            --accent: #2980b9; 
-            --bg: #f1f5f9; /* สีเทาอ่อนของพื้นหลังเดิม */
+            --bg: #f1f5f9; 
             --main-gradient: linear-gradient(135deg, #1a5276, #2980b9);
         }
         
@@ -23,25 +22,31 @@
             font-family: 'Prompt', sans-serif; 
             background-color: var(--bg); 
             color: #2c3e50; 
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
             margin: 0; padding: 0;
             overflow-x: hidden;
         }
 
+        /* --- Header: ปรับช่องว่างให้เส้นชิดข้อความมากขึ้น --- */
         .app-header {
             background: #ffffff;
             text-align: center;
             border-bottom: 4px solid var(--primary);
             box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            padding: 15px 10px 5px 10px; 
+            padding: 15px 10px 0px 10px; /* เอา Padding ล่างออกเพื่อให้เส้นชิดขึ้น */
             width: 100%;
         }
 
         .school-logo { height: 45px; margin-bottom: 5px; }
-        .app-title { font-size: clamp(1.1rem, 4.5vw, 1.6rem); font-weight: 700; color: var(--primary); margin: 0; }
-        .app-subtitle { font-size: clamp(0.7rem, 3vw, 0.9rem); color: #475569; font-weight: 600; }
+        .app-title { font-size: clamp(1.2rem, 5vw, 1.7rem); font-weight: 700; color: var(--primary); margin: 0; }
+        
+        /* ลดระยะห่างใต้ Subtitle ให้เส้น border ชิดขึ้น */
+        .app-subtitle { 
+            font-size: clamp(0.75rem, 3.2vw, 0.95rem); 
+            color: #475569; 
+            font-weight: 600; 
+            margin-top: 2px;
+            margin-bottom: 8px; /* ปรับค่านี้เพื่อให้เส้นอยู่ใต้ข้อความพอดี */
+        }
 
         .content-container { 
             max-width: 750px; 
@@ -65,63 +70,63 @@
             padding: 12px; 
             font-weight: 600; 
             text-align: center;
-            font-size: 0.95rem;
+            font-size: 1rem;
         }
         
         .info-grid { display: grid; grid-template-columns: 1fr; gap: 10px; padding: 15px; }
         @media (min-width: 600px) { .info-grid { grid-template-columns: 1fr 1fr; gap: 12px; } }
 
-        /* ปรับกลับมาใช้พื้นหลังสีเทาอ่อนในกล่องข้อความ */
         .info-box {
             display: flex; 
             align-items: center; 
-            background: #f8fafc; /* สีเทาอ่อนที่คุณครูชอบ */
-            padding: 10px; 
+            background: #f8fafc; 
+            padding: 12px; 
             border-radius: 15px; 
             border: 1px solid #e2e8f0;
-            white-space: nowrap; /* บังคับให้อยู่บรรทัดเดียวกัน */
+            white-space: nowrap; /* ห้ามตัดบรรทัด */
             overflow: hidden;
             min-width: 0;
         }
         
         .info-icon { 
-            min-width: 36px; 
-            height: 36px; 
+            min-width: 38px; 
+            height: 38px; 
             background: white; 
             border-radius: 50%; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             color: var(--primary); 
-            font-size: 1.1rem; 
-            margin-right: 10px; 
+            font-size: 1.2rem; 
+            margin-right: 12px; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         
         .info-text { flex: 1; min-width: 0; overflow: hidden; }
-        .info-text strong { display: block; font-size: 0.85rem; color: var(--primary); margin-bottom: 1px; }
+        .info-text strong { display: block; font-size: 0.9rem; color: var(--primary); margin-bottom: 1px; }
         
-        /* ปรับขนาดฟอนต์อัตโนมัติเพื่อให้บรรทัดเดียวไม่ล้นการ์ด */
+        /* ปรับขนาดตัวอักษรให้ใหญ่ขึ้น แต่อ่านง่ายในบรรทัดเดียว */
         .info-text p { 
             margin: 0; 
-            font-size: clamp(0.65rem, 2.7vw, 0.8rem); 
+            font-size: clamp(0.75rem, 3vw, 0.85rem); 
             color: #64748b; 
+            font-weight: 400;
             overflow: hidden;
-            text-overflow: ellipsis;
+            text-overflow: ellipsis; /* ถ้าจอยาวไม่พอจริงๆ จะใส่ ... ให้แทนการตัดบรรทัด */
         }
 
         .map-container { width: 100%; height: 220px; border-radius: 15px; overflow: hidden; margin-top: 5px; border: 1px solid #e2e8f0; }
         iframe { width: 100%; height: 100%; border: 0; }
 
-        .form-control { border-radius: 12px; padding: 10px; border: 2px solid #f1f5f9; background: #f8fafc; font-size: 15px; }
-        label { font-weight: 600; font-size: 0.85rem; margin-bottom: 6px; color: #475569; display: block; }
+        .form-control { border-radius: 12px; padding: 12px; border: 2px solid #f1f5f9; background: #f8fafc; font-size: 15px; }
+        label { font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; color: #475569; display: block; }
 
         .btn-submit { 
             background: #15803d; border: none; border-radius: 12px; padding: 12px; font-weight: 600; color: white; width: 100%; 
-            display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.95rem;
+            display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1rem;
         }
 
-        footer { margin-top: auto; padding: 20px; text-align: center; font-size: 0.75rem; color: #94a3b8; background: #fff; border-top: 1px solid #e2e8f0; }
+        footer { padding: 20px; text-align: center; font-size: 0.8rem; color: #94a3b8; background: #fff; border-top: 1px solid #e2e8f0; }
     </style>
 </head>
 <body>
