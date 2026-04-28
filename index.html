@@ -30,7 +30,7 @@
             overflow-x: hidden;
         }
 
-        /* --- App Header: เส้นอยู่ติดใต้ข้อความ --- */
+        /* --- App Header --- */
         .app-header {
             background: #ffffff;
             text-align: center;
@@ -40,116 +40,122 @@
             width: 100%;
         }
 
-        .school-logo { height: 50px; margin-bottom: 5px; }
+        .school-logo { height: 45px; margin-bottom: 5px; }
         .app-title { 
-            font-size: clamp(1.2rem, 5vw, 1.8rem); 
+            font-size: clamp(1.1rem, 4.5vw, 1.6rem); 
             font-weight: 700; 
             color: var(--primary); 
             margin: 0;
-            white-space: nowrap;
         }
         .app-subtitle { 
-            font-size: clamp(0.75rem, 3.5vw, 0.95rem); 
+            font-size: clamp(0.7rem, 3vw, 0.9rem); 
             color: #475569; 
             margin-top: 2px;
             margin-bottom: 5px; 
             font-weight: 600;
-            white-space: nowrap;
         }
 
         .content-container { 
             max-width: 750px; 
-            margin: 20px auto; 
-            padding: 0 15px; 
+            margin: 15px auto; 
+            padding: 0 12px; 
             width: 100%; 
         }
         
         .form-card { 
             border: none; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
+            border-radius: 18px; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06); 
             background: white; 
             overflow: hidden; 
-            margin-bottom: 20px; 
+            margin-bottom: 15px; 
         }
         
         .card-header-custom { 
             background: var(--main-gradient); 
             color: white; 
-            padding: 15px; 
+            padding: 12px; 
             font-weight: 600; 
             text-align: center;
-            font-size: 1rem;
-            white-space: nowrap;
+            font-size: 0.95rem;
         }
         
-        .info-grid { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 15px; }
-        @media (min-width: 600px) { .info-grid { grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; } }
+        .info-grid { display: grid; grid-template-columns: 1fr; gap: 10px; padding: 15px; }
+        @media (min-width: 600px) { .info-grid { grid-template-columns: 1fr 1fr; gap: 12px; } }
 
         .info-box {
             display: flex; 
             align-items: center; 
             background: #f8fafc;
-            padding: 12px; 
-            border-radius: 15px; 
+            padding: 10px; 
+            border-radius: 12px; 
             border: 1px solid #e2e8f0;
-            white-space: nowrap;
+            min-width: 0; /* กันล้น */
         }
         
         .info-icon { 
-            min-width: 40px; 
-            height: 40px; 
+            min-width: 36px; 
+            height: 36px; 
             background: white; 
             border-radius: 50%; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             color: var(--primary); 
-            font-size: 1.2rem; 
-            margin-right: 12px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-size: 1.1rem; 
+            margin-right: 10px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
         }
         
-        .info-text strong { display: block; font-size: 0.9rem; color: var(--primary); }
-        .info-text p { margin: 0; font-size: 0.85rem; color: #64748b; }
+        .info-text { flex: 1; min-width: 0; overflow: hidden; }
+        .info-text strong { display: block; font-size: 0.85rem; color: var(--primary); margin-bottom: 1px; }
+        .info-text p { 
+            margin: 0; 
+            font-size: 0.8rem; 
+            color: #64748b; 
+            line-height: 1.3;
+            overflow-wrap: break-word; /* ตัดบรรทัดเมื่อยาวเกิน */
+        }
 
-        .map-container { width: 100%; height: 250px; border-radius: 15px; overflow: hidden; margin-top: 5px; border: 1px solid #e2e8f0; }
+        .map-container { width: 100%; height: 220px; border-radius: 12px; overflow: hidden; margin-top: 5px; border: 1px solid #e2e8f0; }
         iframe { width: 100%; height: 100%; border: 0; }
 
         .form-control { 
-            border-radius: 12px; 
-            padding: 12px; 
+            border-radius: 10px; 
+            padding: 10px; 
             border: 2px solid #f1f5f9; 
             background: #f8fafc; 
-            font-size: 16px;
+            font-size: 15px;
         }
         
-        label { font-weight: 600; font-size: 0.9rem; margin-bottom: 8px; color: #475569; display: block; }
+        label { font-weight: 600; font-size: 0.85rem; margin-bottom: 6px; color: #475569; display: block; }
 
         .btn-submit { 
             background: #15803d; 
             border: none; 
-            border-radius: 12px; 
-            padding: 14px; 
+            border-radius: 10px; 
+            padding: 12px; 
             font-weight: 600; 
             color: white; 
             width: 100%; 
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
+            font-size: 0.95rem;
         }
 
-        /* Modal styling */
-        .swal2-popup { font-family: 'Prompt', sans-serif !important; border-radius: 20px !important; }
-        .swal2-title { white-space: nowrap !important; font-size: 1.4rem !important; }
-        .swal2-html-container { white-space: nowrap !important; }
+        /* Modal styling: ลดขนาดตัวอักษรลง */
+        .swal2-popup { font-family: 'Prompt', sans-serif !important; border-radius: 15px !important; width: 300px !important; }
+        .swal2-title { font-size: 1.2rem !important; }
+        .swal2-html-container { font-size: 0.85rem !important; }
+        .swal2-confirm { font-size: 0.9rem !important; padding: 8px 25px !important; }
 
         footer { 
             margin-top: auto; 
-            padding: 20px; 
+            padding: 15px; 
             text-align: center; 
-            font-size: 0.8rem; 
+            font-size: 0.75rem; 
             color: #94a3b8; 
             background: #fff;
             border-top: 1px solid #e2e8f0;
@@ -167,7 +173,7 @@
 <div class="content-container">
     <div class="form-card">
         <div class="card-header-custom">ข้อมูลติดต่อ</div>
-        <div class="card-body p-2">
+        <div class="card-body p-1">
             <div class="info-grid">
                 <div class="info-box">
                     <div class="info-icon"><i class="bi bi-geo-alt-fill"></i></div>
@@ -198,24 +204,19 @@
                     </div>
                 </div>
             </div>
-           <div class="px-3 pb-3">
-    <div class="map-container">
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.1719686893307!2d100.06434427311828!3d6.625550221972894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304c8d429cb6b585%3A0x4f183071567def09!2z4LmC4Lij4LiH4LmA4Lij4Li14Lii4LiZ4Lie4Li04Lih4Liy4LiZ4Lie4Li04LiX4Lii4Liy4Liq4Lij4Lij4LiE4LmM4Liq4LiV4Li54Lil!5e0!3m2!1sth!2sth!4v1777339927725!5m2!1sth!2sth" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-    </div>
-</div>
+            <div class="px-3 pb-3">
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.1719686893307!2d100.06434427311828!3d6.625550221972894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304c8d429cb6b585%3A0x4f183071567def09!2z4LmC4Lij4LiH4LmA4Lij4Li14Lii4LiZ4Lie4Li04Lih4Liy4LiZ4Lie4Li04LiX4Lii4Liy4Liq4Lij4Lij4LiE4LmM4Liq4LiV4Li54Lil!5e0!3m2!1sth!2sth!4v1777339927725!5m2!1sth!2sth" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="form-card">
         <div class="card-header-custom">ส่งข้อความถึงเจ้าหน้าที่</div>
-        <div class="card-body p-4">
+        <div class="card-body p-3">
             <form id="contactForm">
-                <div class="row g-3">
+                <div class="row g-2">
                     <div class="col-12 col-md-6">
                         <label>ชื่อ-นามสกุล ผู้ติดต่อ</label>
                         <input type="text" name="name" class="form-control" required>
@@ -226,9 +227,9 @@
                     </div>
                     <div class="col-12">
                         <label>เรื่องที่ต้องการสอบถามหรือแจ้งปัญหา</label>
-                        <textarea name="message" class="form-control" rows="4" placeholder="พิมพ์ข้อความที่ต้องการแจ้งเจ้าหน้าที่..." required></textarea>
+                        <textarea name="message" class="form-control" rows="3" placeholder="พิมพ์ข้อความที่ต้องการแจ้งเจ้าหน้าที่..." required></textarea>
                     </div>
-                    <div class="col-12 mt-4">
+                    <div class="col-12 mt-3">
                         <button type="submit" id="submitBtn" class="btn-submit">
                             <i class="bi bi-send-check-fill"></i> ส่งข้อความถึงเจ้าหน้าที่
                         </button>
@@ -251,13 +252,13 @@
         e.preventDefault();
         const btn = document.getElementById('submitBtn');
         btn.disabled = true;
-        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> กำลังส่งข้อมูล...';
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> กำลังส่ง...';
 
         fetch(SCRIPT_URL, { method: 'POST', body: new FormData(this) })
         .then(response => {
             Swal.fire({
-                title: 'ส่งข้อความสำเร็จ!',
-                text: 'เจ้าหน้าที่ได้รับข้อความเรียบร้อยแล้วค่ะ',
+                title: 'ส่งสำเร็จ!',
+                text: 'เจ้าหน้าที่ได้รับข้อความแล้วค่ะ',
                 icon: 'success',
                 confirmButtonColor: '#1a5276'
             });
