@@ -27,22 +27,22 @@
             display: flex;
             flex-direction: column;
             margin: 0; padding: 0;
-            overflow-x: hidden; /* ป้องกันหน้าจอเลื่อนซ้ายขวา */
+            overflow-x: hidden;
         }
 
-        /* --- App Header: แบนเนอร์เดียวกับระบบหลัก (Responsive) --- */
+        /* --- App Header: เส้นอยู่ติดใต้ข้อความ --- */
         .app-header {
             background: #ffffff;
             text-align: center;
             border-bottom: 4px solid var(--primary);
             box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            padding: 15px 10px;
+            padding: 15px 10px 0px 10px; 
             width: 100%;
         }
 
         .school-logo { height: 50px; margin-bottom: 5px; }
         .app-title { 
-            font-size: clamp(1.2rem, 5vw, 1.8rem); /* ปรับขนาดฟอนต์ตามจออัตโนมัติ */
+            font-size: clamp(1.2rem, 5vw, 1.8rem); 
             font-weight: 700; 
             color: var(--primary); 
             margin: 0;
@@ -52,7 +52,9 @@
             font-size: clamp(0.75rem, 3.5vw, 0.95rem); 
             color: #475569; 
             margin-top: 2px;
+            margin-bottom: 5px; 
             font-weight: 600;
+            white-space: nowrap;
         }
 
         .content-container { 
@@ -78,40 +80,49 @@
             font-weight: 600; 
             text-align: center;
             font-size: 1rem;
+            white-space: nowrap;
         }
         
-        .info-item { 
+        .info-grid { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 15px; }
+        @media (min-width: 600px) { .info-grid { grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; } }
+
+        .info-box {
             display: flex; 
             align-items: center; 
-            justify-content: center; 
-            padding: 15px; 
+            background: #f8fafc;
+            padding: 12px; 
+            border-radius: 15px; 
+            border: 1px solid #e2e8f0;
+            white-space: nowrap;
         }
         
         .info-icon { 
-            min-width: 45px; 
-            height: 45px; 
-            background: #f0f7ff; 
+            min-width: 40px; 
+            height: 40px; 
+            background: white; 
             border-radius: 50%; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             color: var(--primary); 
             font-size: 1.2rem; 
-            margin-right: 15px; 
+            margin-right: 12px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         
-        .info-text strong { display: block; font-size: 1rem; color: var(--primary); }
+        .info-text strong { display: block; font-size: 0.9rem; color: var(--primary); }
         .info-text p { margin: 0; font-size: 0.85rem; color: #64748b; }
+
+        .map-container { width: 100%; height: 250px; border-radius: 15px; overflow: hidden; margin-top: 5px; border: 1px solid #e2e8f0; }
+        iframe { width: 100%; height: 100%; border: 0; }
 
         .form-control { 
             border-radius: 12px; 
             padding: 12px; 
             border: 2px solid #f1f5f9; 
             background: #f8fafc; 
-            font-size: 16px; /* ป้องกัน iPhone Zoom อัตโนมัติ */
-            transition: 0.3s;
+            font-size: 16px;
         }
-        .form-control:focus { border-color: var(--accent); box-shadow: none; background: #fff; }
         
         label { font-weight: 600; font-size: 0.9rem; margin-bottom: 8px; color: #475569; display: block; }
 
@@ -122,33 +133,26 @@
             padding: 14px; 
             font-weight: 600; 
             color: white; 
-            transition: 0.3s; 
             width: 100%; 
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            font-size: 1rem;
         }
-        .btn-submit:hover { background: #166534; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(21, 128, 61, 0.2); }
-        .btn-submit:disabled { background: #94a3b8; transform: none; }
+
+        /* Modal styling */
+        .swal2-popup { font-family: 'Prompt', sans-serif !important; border-radius: 20px !important; }
+        .swal2-title { white-space: nowrap !important; font-size: 1.4rem !important; }
+        .swal2-html-container { white-space: nowrap !important; }
 
         footer { 
             margin-top: auto; 
-            padding: 25px; 
+            padding: 20px; 
             text-align: center; 
             font-size: 0.8rem; 
             color: #94a3b8; 
             background: #fff;
             border-top: 1px solid #e2e8f0;
-        }
-
-        /* ปรับสไตล์สำหรับมือถือจอเล็ก */
-        @media (max-width: 480px) {
-            .content-container { margin: 15px auto; }
-            .info-item { flex-direction: column; text-align: center; }
-            .info-icon { margin-right: 0; margin-bottom: 10px; }
-            .card-header-custom { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -161,15 +165,42 @@
 </header>
 
 <div class="content-container">
-    
     <div class="form-card">
         <div class="card-header-custom">หน่วยงานที่รับผิดชอบ</div>
-        <div class="card-body p-3">
-            <div class="info-item">
-                <div class="info-icon"><i class="bi bi-building-fill-check"></i></div>
-                <div class="info-text text-start">
-                    <strong>งานสารบรรณโรงเรียนพิมานพิทยาสรรค์</strong>
-                    <p>สำนักงานอำนวยการ (ชั้น 1 อาคารเรียน 3) </p>
+        <div class="card-body p-2">
+            <div class="info-grid">
+                <div class="info-box">
+                    <div class="info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                    <div class="info-text">
+                        <strong>สถานที่ตั้ง</strong>
+                        <p>112 ถ.สตูลธานี ต.พิมาน อ.เมือง จ.สตูล</p>
+                    </div>
+                </div>
+                <div class="info-box">
+                    <div class="info-icon"><i class="bi bi-building-fill-check"></i></div>
+                    <div class="info-text">
+                        <strong>หน่วยงาน</strong>
+                        <p>สำนักงานอำนวยการ (ชั้น 1 อาคารเรียน 3)</p>
+                    </div>
+                </div>
+                <div class="info-box">
+                    <div class="info-icon"><i class="bi bi-line text-success"></i></div>
+                    <div class="info-text">
+                        <strong>Line ID</strong>
+                        <p>piman_sarabun</p>
+                    </div>
+                </div>
+                <div class="info-box">
+                    <div class="info-icon"><i class="bi bi-telephone-fill"></i></div>
+                    <div class="info-text">
+                        <strong>โทรศัพท์</strong>
+                        <p>074-711126 ต่อ 101</p>
+                    </div>
+                </div>
+            </div>
+            <div class="px-3 pb-3">
+                <div class="map-container">
+                    <iframe src="http://googleusercontent.com/maps.google.com/4" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -182,15 +213,15 @@
                 <div class="row g-3">
                     <div class="col-12 col-md-6">
                         <label>ชื่อ-นามสกุล ผู้ติดต่อ</label>
-                        <input type="text" name="name" id="senderName" class="form-control" required>
+                        <input type="text" name="name" class="form-control" placeholder="ระบุชื่อของคุณ" required>
                     </div>
                     <div class="col-12 col-md-6">
                         <label>เบอร์โทรศัพท์ติดต่อกลับ</label>
-                        <input type="tel" name="tel" id="senderTel" class="form-control" required>
+                        <input type="tel" name="tel" class="form-control" placeholder="08XXXXXXXX" required>
                     </div>
                     <div class="col-12">
                         <label>เรื่องที่ต้องการสอบถามหรือแจ้งปัญหา</label>
-                        <textarea name="message" id="senderMsg" class="form-control" rows="4" placeholder="พิมพ์ข้อความที่ต้องการแจ้งเจ้าหน้าที่..." required></textarea>
+                        <textarea name="message" class="form-control" rows="4" placeholder="พิมพ์ข้อความที่ต้องการแจ้งเจ้าหน้าที่..." required></textarea>
                     </div>
                     <div class="col-12 mt-4">
                         <button type="submit" id="submitBtn" class="btn-submit">
@@ -201,12 +232,6 @@
             </form>
         </div>
     </div>
-
-    <div class="text-center">
-        <a href="javascript:history.back()" class="text-muted text-decoration-none small">
-            <i class="bi bi-arrow-left"></i> กลับสู่หน้าก่อนหน้า
-        </a>
-    </div>
 </div>
 
 <footer>
@@ -215,19 +240,15 @@
 </footer>
 
 <script>
-    // แทนที่ด้วย Web App URL ที่คุณครูได้จาก Google Apps Script (GAS)
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbym6d4HsmNVfT81ygGvVtnnOb6V6IniBRTfyA65Gle_sFW8Dt9MU9BoUR--kRkvSy4b/exec";
 
     document.getElementById('contactForm').onsubmit = function(e) {
         e.preventDefault();
         const btn = document.getElementById('submitBtn');
-        
         btn.disabled = true;
         btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> กำลังส่งข้อมูล...';
 
-        const formData = new FormData(this);
-        
-        fetch(SCRIPT_URL, { method: 'POST', body: formData })
+        fetch(SCRIPT_URL, { method: 'POST', body: new FormData(this) })
         .then(response => {
             Swal.fire({
                 title: 'ส่งข้อความสำเร็จ!',
@@ -235,12 +256,12 @@
                 icon: 'success',
                 confirmButtonColor: '#1a5276'
             });
-            document.getElementById('contactForm').reset();
+            this.reset();
         })
         .catch(error => {
             Swal.fire({
                 title: 'เกิดข้อผิดพลาด',
-                text: 'ไม่สามารถส่งข้อมูลได้ในขณะนี้ กรุณาลองใหม่อีกครั้งค่ะ',
+                text: 'กรุณาลองใหม่อีกครั้งค่ะ',
                 icon: 'error'
             });
         })
