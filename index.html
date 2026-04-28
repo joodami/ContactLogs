@@ -26,26 +26,33 @@
             overflow-x: hidden;
         }
 
-        /* --- Header: ปรับช่องว่างให้เส้นชิดข้อความมากขึ้น --- */
+        /* --- Header: เน้นย้ำให้เส้นชิดข้อความที่สุด --- */
         .app-header {
             background: #ffffff;
             text-align: center;
             border-bottom: 4px solid var(--primary);
             box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            padding: 15px 10px 0px 10px; /* เอา Padding ล่างออกเพื่อให้เส้นชิดขึ้น */
+            padding: 15px 10px 0px 10px !important; /* บังคับไม่มี padding ล่าง */
             width: 100%;
         }
 
         .school-logo { height: 45px; margin-bottom: 5px; }
-        .app-title { font-size: clamp(1.2rem, 5vw, 1.7rem); font-weight: 700; color: var(--primary); margin: 0; }
         
-        /* ลดระยะห่างใต้ Subtitle ให้เส้น border ชิดขึ้น */
+        .app-title { 
+            font-size: clamp(1.2rem, 5vw, 1.7rem); 
+            font-weight: 700; 
+            color: var(--primary); 
+            margin: 0 !important; 
+            line-height: 1.2 !important;
+        }
+        
         .app-subtitle { 
             font-size: clamp(0.75rem, 3.2vw, 0.95rem); 
             color: #475569; 
             font-weight: 600; 
-            margin-top: 2px;
-            margin-bottom: 8px; /* ปรับค่านี้เพื่อให้เส้นอยู่ใต้ข้อความพอดี */
+            margin: 0 !important; /* เอา margin ทุกด้านออก */
+            padding-bottom: 4px !important; /* ใช้ตัวนี้คุมระยะห่างจากเส้นสีน้ำเงินแทน */
+            line-height: 1 !important; /* บังคับให้ความสูงบรรทัดเท่ากับตัวอักษรพอดี */
         }
 
         .content-container { 
@@ -83,7 +90,7 @@
             padding: 12px; 
             border-radius: 15px; 
             border: 1px solid #e2e8f0;
-            white-space: nowrap; /* ห้ามตัดบรรทัด */
+            white-space: nowrap;
             overflow: hidden;
             min-width: 0;
         }
@@ -104,15 +111,13 @@
         
         .info-text { flex: 1; min-width: 0; overflow: hidden; }
         .info-text strong { display: block; font-size: 0.9rem; color: var(--primary); margin-bottom: 1px; }
-        
-        /* ปรับขนาดตัวอักษรให้ใหญ่ขึ้น แต่อ่านง่ายในบรรทัดเดียว */
         .info-text p { 
             margin: 0; 
             font-size: clamp(0.75rem, 3vw, 0.85rem); 
             color: #64748b; 
             font-weight: 400;
             overflow: hidden;
-            text-overflow: ellipsis; /* ถ้าจอยาวไม่พอจริงๆ จะใส่ ... ให้แทนการตัดบรรทัด */
+            text-overflow: ellipsis;
         }
 
         .map-container { width: 100%; height: 220px; border-radius: 15px; overflow: hidden; margin-top: 5px; border: 1px solid #e2e8f0; }
